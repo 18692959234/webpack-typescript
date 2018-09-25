@@ -1,4 +1,4 @@
-# wp_init_project
+# webpack-typescript
 webpack 打包初始化 包
 # 开始
 webpack、webpack-cli、webpack-dev-server
