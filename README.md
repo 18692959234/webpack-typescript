@@ -1,5 +1,7 @@
 # webpack-typescript
 webpack 打包初始化 包
+# 克隆或下载
+npm i 或者cnpm i   mac系统  前面加sudo
 # 开始
 webpack、webpack-cli、webpack-dev-server
 # 样式
