@@ -6,7 +6,7 @@ const AutoPrefixer = require('autoprefixer'); //css3消除前缀
 module.exports = {
 	mode: "development",
 	entry: {
-		main: "./src/js/main.ts"
+		main: "./src/js/main.js"
 	},
 	output: {
 		filename: "[name].js",
@@ -62,6 +62,9 @@ module.exports = {
 						},
 						{
 							loader: "less-loader"
+						},
+						{
+							loader: "postcss-loader"
 						}
 
 					],
@@ -103,6 +106,8 @@ module.exports = {
 
 	//插件，用于生产模版和各项功能
 	plugins: [
+		// extractLess,
+		AutoPrefixer,
 		new extractTextPlugin("css/index.css"), //这里的/css/index.css 是分离后的路径
 		new uglify(), //js压缩插件
 		new htmlPlugin({
@@ -117,7 +122,7 @@ module.exports = {
 
 	devServer: {
 		contentBase: path.resolve(__dirname, '../dist'),
-		host: 'localhost',
+		host: '192.168.1.115',
 		compress: true,
 		port: 8888,
 		proxy: {
