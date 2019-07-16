@@ -3,6 +3,7 @@ const uglify = require('uglifyjs-webpack-plugin'); //js压缩
 const htmlPlugin = require("html-webpack-plugin"); //打包html
 const extractTextPlugin = require("extract-text-webpack-plugin") //css  img 分离
 const AutoPrefixer = require('autoprefixer'); //css3消除前缀
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 module.exports = {
 	mode: "development",
 	entry: {
@@ -116,8 +117,21 @@ module.exports = {
 			},
 			hash: true, //为了开发中js有缓存效果，所以加入hash，这样可以有效避免缓存JS。
 			template: './src/index.html' //是要打包的html模版路径和文件名称。
-
-		})
+    }),
+    new OptimizeCSSAssetsPlugin({
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require('cssnano'),
+      // cssProcessorOptions: cssnanoOptions,
+      cssProcessorPluginOptions: {
+        preset: ['default', {
+          discardComments: {
+            removeAll: true,
+          },
+          normalizeUnicode: false
+        }]
+      },
+      canPrint: true
+    })
 	],
 
 	devServer: {
